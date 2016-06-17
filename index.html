@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -89,12 +89,15 @@
         <p>The visualization of deep learning network is very helpful to understand the global structure of how the network is evolved. Fortunately, caffe has already provided such a tool to visualize the network, namely via plotting the nets defined in prototxt file. </p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Install-the-graphviz"><a href="#Install-the-graphviz" class="headerlink" title="Install the graphviz"></a>Install the graphviz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pip install pydot</span><br><span class="line">$ sudo apt-get instll graphviz</span><br></pre></td></tr></table></figure>
 <h3 id="Execute-the-commands"><a href="#Execute-the-commands" class="headerlink" title="Execute the commands"></a>Execute the commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> caffe/examples</span><br><span class="line">$ python python/draw_net.py  yourPath.prototxt yourNetwork.name</span><br></pre></td></tr></table></figure>
-<h2 id="Visualization-Results"><a href="#Visualization-Results" class="headerlink" title="Visualization Results"></a>Visualization Results</h2><p><img src="img/cascade_cnn.jpg" alt="Sample Image Added via Markdown"><br><img src="img/VanillaCNN.png" alt="Sample Image Added via Markdown"></p>
+<h2 id="Visualization-Results"><a href="#Visualization-Results" class="headerlink" title="Visualization Results"></a>Visualization Results</h2><p>I have plotted two CNN networks which have been used to perform face landmark detection. The task of face landmark detection uses HDF5 format to store the input and switch the last layer of classifier to regression. </p>
+<p><img src="img/cascade_cnn.jpg" alt="CNN network used in luoyetx@github.com"><br><img src="img/VanillaCNN.png" alt="CNN network used in ishay2b@github.com"></p>
+<p>I have retrained the VanillaCNN model and the results seem to be pretty good. Sample face landmark detection results are listed here.</p>
+<p><img src="img/VanillaCNN_detection/0132-image31201.jpg"><br><img src="img/VanillaCNN_detection/0177-image71131.jpg"><br><img src="img/VanillaCNN_detection/0223-image08358.jpg"><br><img src="img/VanillaCNN_detection/0275-image17840.jpg"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="cipjx0hup0000las6vhzm159d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="cipjxfa2n0000mss6njiaekfx" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -129,7 +132,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -150,7 +153,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Cunjian Chen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
