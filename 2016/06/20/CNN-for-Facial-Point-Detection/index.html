@@ -13,7 +13,10 @@
 <meta property="og:description" content="After Alexnet won 2012 ImageNet competition, deep learning has become one of the most promising fields in the computer vision field. Convolutional Neural Network (CNN) has attracted much attention sin">
 <meta property="og:image" content="http://yoursite.com/img/cascade_cnn.jpg">
 <meta property="og:image" content="http://yoursite.com/img/20160220/log/156.jpg">
-<meta property="og:updated_time" content="2016-06-20T15:48:41.000Z">
+<meta property="og:image" content="http://yoursite.com/img/20160220/log/159.jpg">
+<meta property="og:image" content="http://yoursite.com/img/20160220/log/163.jpg">
+<meta property="og:image" content="http://yoursite.com/img/20160220/log/167.jpg">
+<meta property="og:updated_time" content="2016-06-20T16:01:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CNN for Facial Point Detection">
 <meta name="twitter:description" content="After Alexnet won 2012 ImageNet competition, deep learning has become one of the most promising fields in the computer vision field. Convolutional Neural Network (CNN) has attracted much attention sin">
@@ -98,12 +101,16 @@
 <h2 id="Experimental-Result"><a href="#Experimental-Result" class="headerlink" title="Experimental Result"></a>Experimental Result</h2><h3 id="Results-on-7-876-images"><a href="#Results-on-7-876-images" class="headerlink" title="Results on 7,876 images"></a>Results on 7,876 images</h3><p>Test Number: 3466<br>Time Consume: 69.566 s<br>FPS: 49.823<br>LEVEL - 1<br>Mean Error:<br>    Left Eye       = 0.022343<br>    Right Eye      = 0.023272<br>    Nose           = 0.030272<br>    Left Mouth     = 0.028617<br>    Right Mouth    = 0.028821<br>Failure:<br>    Left Eye       = 0.059146<br>    Right Eye      = 0.063474<br>    Nose           = 0.140219<br>    Left Mouth     = 0.111079<br>    Right Mouth    = 0.118003</p>
 <h2 id="Visualization-the-Network"><a href="#Visualization-the-Network" class="headerlink" title="Visualization the Network"></a>Visualization the Network</h2><p>I have plotted the CNN network used in this experiment.</p>
 <p><img src="img/cascade_cnn.jpg" alt="CNN network"></p>
-<h2 id="Face-Alignment-Results-on-LFPW-dataset"><a href="#Face-Alignment-Results-on-LFPW-dataset" class="headerlink" title="Face Alignment Results on LFPW dataset"></a>Face Alignment Results on LFPW dataset</h2><p><img src="img/20160220/log/156.jpg" alt="CNN network"></p>
+<h2 id="Face-Alignment-Results-on-LFPW-dataset"><a href="#Face-Alignment-Results-on-LFPW-dataset" class="headerlink" title="Face Alignment Results on LFPW dataset"></a>Face Alignment Results on LFPW dataset</h2><div id="image-table"><br>    <table><br>        <tr><br>            <td style="padding:5px"><br>                <img src="img/20160220/log/156.jpg" alt="Demo Result 1" height="200" width="250"><br>              </td><br>            <td style="padding:5px"><br>                <img src="img/20160220/log/159.jpg" alt="Demo Result 2" height="200" width="250"><br>             </td><br>        </tr><br>    </table><br></div>
+
+<p>However, by using Level 1 is not sufficient in this case.  We still need to add more levels to train the CNN. Level 1 just provides a coarse estimation of landmark here.</p>
+<div id="image-table"><br>    <table><br>        <tr><br>            <td style="padding:5px"><br>                <img src="img/20160220/log/163.jpg" alt="Demo Result 3" height="200" width="250"><br>              </td><br>            <td style="padding:5px"><br>                <img src="img/20160220/log/167.jpg" alt="Demo Result 4" height="200" width="250"><br>             </td><br>        </tr><br>    </table><br></div>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="cipo75tne0000hwv59iv0rrzy" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="cipo796ib0000jtv578p93hws" class="article-share-link">Delen</a>
       
       
     </footer>
