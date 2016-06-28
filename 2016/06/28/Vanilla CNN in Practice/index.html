@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vanillacnn | Random Thoughts on Deep Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Face alignment can be solved by applying a very straightforward CNN approach. That means we can “tweak” traditional CNN used by image classification to do regression task for face alignment. 
+Yue Wu,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vanillacnn">
+<meta property="og:url" content="http://yoursite.com/2016/06/28/Vanilla CNN in Practice/index.html">
+<meta property="og:site_name" content="Random Thoughts on Deep Learning">
+<meta property="og:description" content="Face alignment can be solved by applying a very straightforward CNN approach. That means we can “tweak” traditional CNN used by image classification to do regression task for face alignment. 
+Yue Wu,">
+<meta property="og:image" content="http://yoursite.com/img/VanillaCNN.png">
+<meta property="og:image" content="http://yoursite.com/img/VanillaCNN_detection/0132-image31201.jpg">
+<meta property="og:image" content="http://yoursite.com/img/VanillaCNN_detection/0177-image71131.jpg">
+<meta property="og:image" content="http://yoursite.com/img/VanillaCNN_detection/0223-image08358.jpg">
+<meta property="og:image" content="http://yoursite.com/img/VanillaCNN_detection/0275-image17840.jpg">
+<meta property="og:updated_time" content="2016-06-28T14:11:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vanillacnn">
+<meta name="twitter:description" content="Face alignment can be solved by applying a very straightforward CNN approach. That means we can “tweak” traditional CNN used by image classification to do regression task for face alignment. 
+Yue Wu,">
+<meta name="twitter:image" content="http://yoursite.com/img/VanillaCNN.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Random Thoughts on Deep Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Random Thoughts on Deep Learning</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Vanilla CNN in Practice" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/28/Vanilla CNN in Practice/" class="article-date">
+  <time datetime="2016-06-28T13:40:03.000Z" itemprop="datePublished">2016-06-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vanillacnn
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Face alignment can be solved by applying a very straightforward CNN approach. That means we can “tweak” traditional CNN used by image classification to do regression task for face alignment. </p>
+<p>Yue Wu<em>, Tal Hassner</em>, KangGeon Kim, Gerard Medioni and Prem Natarajan, Facial Landmark Detection with Tweaked Convolutional Neural Networks, arXiv preprint arXiv:1511.04031, 21 Mar 2016</p>
+<p><a href="http://www.openu.ac.il/home/hassner/projects/tcnn_landmarks/" target="_blank" rel="external">http://www.openu.ac.il/home/hassner/projects/tcnn_landmarks/</a></p>
+<p>ishay2b@github.com has implementation for this paper, basically the VanillaCNN part.<br><a href="https://github.com/ishay2b/VanillaCNN" target="_blank" rel="external">https://github.com/ishay2b/VanillaCNN</a></p>
+<p>I have retrained the model with the MTFL dataset (10,000) images with five landmarks annotated. The test is AFLW dataset with 2995 images (~3000). You can access the MTFL dataset from the following link:<br><a href="http://mmlab.ie.cuhk.edu.hk/projects/TCDCN.html" target="_blank" rel="external">http://mmlab.ie.cuhk.edu.hk/projects/TCDCN.html</a></p>
+<p>It is noted that the same training dataset has been used in cascaded CNN work.<br><a href="http://mmlab.ie.cuhk.edu.hk/archive/CNN_FacePoint.htm" target="_blank" rel="external">http://mmlab.ie.cuhk.edu.hk/archive/CNN_FacePoint.htm</a></p>
+<p>So please do not confuse with the naming conventions used in the package. </p>
+<p>The first step is to retrain the model by using the provided package. The default set of parameters is used. </p>
+<h2 id="Experimental-Result"><a href="#Experimental-Result" class="headerlink" title="Experimental Result"></a>Experimental Result</h2><h3 id="Results-on-AFLW-dataset"><a href="#Results-on-AFLW-dataset" class="headerlink" title="Results on AFLW dataset"></a>Results on AFLW dataset</h3><p>Test Error AFLW: 8.545266 mean error, 2535 items, 606 failures  0.239053 precent</p>
+<h2 id="Visualization-the-Network"><a href="#Visualization-the-Network" class="headerlink" title="Visualization the Network"></a>Visualization the Network</h2><p>I have plotted the CNN network used in this experiment.</p>
+<p><img src="img/VanillaCNN.png" alt="Vanilla CNN Network"></p>
+<h2 id="Face-Alignment-Results-on-LFPW-dataset"><a href="#Face-Alignment-Results-on-LFPW-dataset" class="headerlink" title="Face Alignment Results on LFPW dataset"></a>Face Alignment Results on LFPW dataset</h2><div id="image-table"><br>    <table><br>        <tr><br>            <td style="padding:5px"><br>                <img src="img/VanillaCNN_detection/0132-image31201.jpg" height="200" width="250"><br>              </td><br>            <td style="padding:5px"><br>                <img src="img/VanillaCNN_detection/0177-image71131.jpg" height="200" width="250"><br>             </td><br>            <td style="padding:5px"><br>                <img src="img/VanillaCNN_detection/0223-image08358.jpg" height="200" width="250"><br>             </td><br>                        <td style="padding:5px"><br>                <img src="img/VanillaCNN_detection/0275-image17840.jpg" height="200" width="250"><br>             </td><br>        </tr><br>    </table><br></div>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/06/28/Vanilla CNN in Practice/" data-id="cipzj81bm0003mcs6c31ubpza" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/20/CNN-for-Facial-Point-Detection/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CNN for Facial Point Detection</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/28/Vanilla CNN in Practice/">vanillacnn</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/20/CNN-for-Facial-Point-Detection/">CNN for Facial Point Detection</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/17/hello-world/">Caffe Visualization</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Cunjian Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
