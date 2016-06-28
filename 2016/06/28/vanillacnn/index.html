@@ -3,17 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Random Thoughts on Deep Learning</title>
+  <title>vanillacnn | Random Thoughts on Deep Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Random Thoughts on Deep Learning">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Face alignment can be solved by applying a very straightforward CNN approach. That means we can “tweak” traditional CNN used by image classification to do regression task for face alignment. 
+Yue Wu,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vanillacnn">
+<meta property="og:url" content="http://yoursite.com/2016/06/28/vanillacnn/index.html">
 <meta property="og:site_name" content="Random Thoughts on Deep Learning">
-<meta property="og:description">
+<meta property="og:description" content="Face alignment can be solved by applying a very straightforward CNN approach. That means we can “tweak” traditional CNN used by image classification to do regression task for face alignment. 
+Yue Wu,">
+<meta property="og:image" content="http://yoursite.com/img/VanillaCNN.png">
+<meta property="og:image" content="http://yoursite.com/img/VanillaCNN_detection/0132-image31201.jpg">
+<meta property="og:image" content="http://yoursite.com/img/VanillaCNN_detection/0177-image71131.jpg">
+<meta property="og:image" content="http://yoursite.com/img/VanillaCNN_detection/0223-image08358.jpg">
+<meta property="og:image" content="http://yoursite.com/img/VanillaCNN_detection/0275-image17840.jpg">
+<meta property="og:updated_time" content="2016-06-28T14:23:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Random Thoughts on Deep Learning">
-<meta name="twitter:description">
+<meta name="twitter:title" content="vanillacnn">
+<meta name="twitter:description" content="Face alignment can be solved by applying a very straightforward CNN approach. That means we can “tweak” traditional CNN used by image classification to do regression task for face alignment. 
+Yue Wu,">
+<meta name="twitter:image" content="http://yoursite.com/img/VanillaCNN.png">
   
     <link rel="alternate" href="/atom.xml" title="Random Thoughts on Deep Learning" type="application/atom+xml">
   
@@ -62,9 +72,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-vanillacnn" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-vanillacnn" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/28/vanillacnn/" class="article-date">
   <time datetime="2016-06-28T13:40:03.000Z" itemprop="datePublished">2016-06-28</time>
@@ -77,8 +85,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/28/vanillacnn/">vanillacnn</a>
+    <h1 class="article-title" itemprop="name">
+      vanillacnn
     </h1>
   
 
@@ -112,102 +120,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-CNN-for-Facial-Point-Detection" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/20/CNN-for-Facial-Point-Detection/" class="article-date">
-  <time datetime="2016-06-20T15:21:36.000Z" itemprop="datePublished">2016-06-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/20/CNN-for-Facial-Point-Detection/">CNN for Facial Point Detection</a>
-    </h1>
+    <a href="/2016/06/20/CNN-for-Facial-Point-Detection/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CNN for Facial Point Detection</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>After Alexnet won 2012 ImageNet competition, deep learning has become one of the most promising fields in the computer vision field. Convolutional Neural Network (CNN) has attracted much attention since then. </p>
-<p>Tang’s group has proposed the use of CNN in a cascade manner to train the landmark detection from coarse to fine. </p>
-<p>Reference: Y. Sun, X. Wang, and X. Tang. Deep Convolutional Network Cascade for Facial Point Detection. In Proceedings of IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2013. </p>
-<p>Here is an implementation for the above proposed method, thanks to luoyetx@github.com.</p>
-<p><a href="https://github.com/luoyetx/deep-landmark" target="_blank" rel="external">https://github.com/luoyetx/deep-landmark</a></p>
-<p>I have retrained the code with just one level, i.e., full face region with five landmarks. The results seem to be pretty good.</p>
-<p>I have used the provided dataset from the website to train the CNN at level 1, which contains 5,590 LFW images and 7,876 other images. </p>
-<h2 id="Experimental-Result"><a href="#Experimental-Result" class="headerlink" title="Experimental Result"></a>Experimental Result</h2><h3 id="Results-on-7-876-images"><a href="#Results-on-7-876-images" class="headerlink" title="Results on 7,876 images"></a>Results on 7,876 images</h3><p>Test Number: 3466<br>Time Consume: 69.566 s<br>FPS: 49.823<br>LEVEL - 1<br>Mean Error:<br>    Left Eye       = 0.022343<br>    Right Eye      = 0.023272<br>    Nose           = 0.030272<br>    Left Mouth     = 0.028617<br>    Right Mouth    = 0.028821<br>Failure:<br>    Left Eye       = 0.059146<br>    Right Eye      = 0.063474<br>    Nose           = 0.140219<br>    Left Mouth     = 0.111079<br>    Right Mouth    = 0.118003</p>
-<h2 id="Visualization-the-Network"><a href="#Visualization-the-Network" class="headerlink" title="Visualization the Network"></a>Visualization the Network</h2><p>I have plotted the CNN network used in this experiment.</p>
-<p><img src="img/cascade_cnn.jpg" alt="CNN network"></p>
-<h2 id="Face-Alignment-Results-on-LFPW-dataset"><a href="#Face-Alignment-Results-on-LFPW-dataset" class="headerlink" title="Face Alignment Results on LFPW dataset"></a>Face Alignment Results on LFPW dataset</h2><div id="image-table"><br>    <table><br>        <tr><br>            <td style="padding:5px"><br>                <img src="img/20160220/log/156.jpg" alt="Demo Result 1" height="200" width="250"><br>              </td><br>            <td style="padding:5px"><br>                <img src="img/20160220/log/159.jpg" alt="Demo Result 2" height="200" width="250"><br>             </td><br>        </tr><br>    </table><br></div>
-
-<p>However, by using Level 1 is not sufficient in this case.  We still need to add more levels to train the CNN. Level 1 just provides a coarse estimation of landmark here.</p>
-<div id="image-table"><br>    <table><br>        <tr><br>            <td style="padding:5px"><br>                <img src="img/20160220/log/163.jpg" alt="Demo Result 3" height="200" width="250"><br>              </td><br>            <td style="padding:5px"><br>                <img src="img/20160220/log/167.jpg" alt="Demo Result 4" height="200" width="250"><br>             </td><br>        </tr><br>    </table><br></div>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="cipzjmn3k0000pds6wkmsrlx7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/17/hello-world/" class="article-date">
-  <time datetime="2016-06-17T14:26:44.000Z" itemprop="datePublished">2016-06-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/17/hello-world/">Caffe Visualization</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>The visualization of deep learning network is very helpful to understand the global structure of how the network is evolved. Fortunately, caffe has already provided such a tool to visualize the network, namely via plotting the nets defined in prototxt file. </p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Install-the-graphviz"><a href="#Install-the-graphviz" class="headerlink" title="Install the graphviz"></a>Install the graphviz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pip install pydot</span><br><span class="line">$ sudo apt-get instll graphviz</span><br></pre></td></tr></table></figure>
-<h3 id="Execute-the-commands"><a href="#Execute-the-commands" class="headerlink" title="Execute the commands"></a>Execute the commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> caffe/examples</span><br><span class="line">$ python python/draw_net.py  yourPath.prototxt yourNetwork.name</span><br></pre></td></tr></table></figure>
-<h2 id="Visualization-Results"><a href="#Visualization-Results" class="headerlink" title="Visualization Results"></a>Visualization Results</h2><p>I have plotted two CNN networks which have been used to perform face landmark detection. The task of face landmark detection uses HDF5 format to store the input and switch the last layer of classifier to regression. </p>
-<p><img src="img/cascade_cnn.jpg" alt="CNN network used in luoyetx@github.com"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="cipzjmn3p0001pds6ksc2vh31" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
