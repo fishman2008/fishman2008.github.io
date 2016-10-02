@@ -64,6 +64,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Transfer-Learning-Tips" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/02/Transfer-Learning-Tips/" class="article-date">
+  <time datetime="2016-10-02T14:34:52.000Z" itemprop="datePublished">2016-10-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/02/Transfer-Learning-Tips/">Transfer_Learning_Tips</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>I came across a post which describes the common principles to follow when apply transfer learning or fine-tuning schemes to the CNN. </p>
+<p>You can find the original post here.</p>
+<p><a href="http://blog.revolutionanalytics.com/2016/08/deep-learning-part-2.html" target="_blank" rel="external">http://blog.revolutionanalytics.com/2016/08/deep-learning-part-2.html</a></p>
+<p>In this post, I quoted some of his statements here. </p>
+<h2 id="Transfer-Learning-and-Fine-tuning-DCNNs"><a href="#Transfer-Learning-and-Fine-tuning-DCNNs" class="headerlink" title="Transfer Learning and Fine-tuning DCNNs"></a>Transfer Learning and Fine-tuning DCNNs</h2><p>In practice, we don?t usually train an entire DCNN from scratch with random initialization. This is because it is relatively rare to have a dataset of sufficient size that is required for the depth of network required. Instead, it is common to pre-train a DCNN on a very large dataset and then use the trained DCNN weights either as an initialization or a fixed feature extractor for the task of interest.</p>
+<p>Fine-Tuning: Transfer learning strategies depend on various factors, but the two most important ones are the size of the new dataset, and its similarity to the original dataset. Keeping in mind that DCNN features are more generic in early layers and more dataset-specific in later layers, there are four major scenarios:</p>
+<p>New dataset is smaller in size and similar in content compared to original dataset: If the data is small, it is not a good idea to fine-tune the DCNN due to overfitting concerns. Since the data is similar to the original data, we expect higher-level features in the DCNN to be relevant to this dataset as well. Hence, the best idea might be to train a linear classifier on the CNN-features.</p>
+<p>New dataset is relatively large in size and similar in content compared to the original dataset: Since we have more data, we can have more confidence that we would not over fit if we were to try to fine-tune through the full network.</p>
+<p>New dataset is smaller in size but very different in content compared to the original dataset: Since the data is small, it is likely best to only train a linear classifier. Since the dataset is very different, it might not be best to train the classifier from the top of the network, which contains more dataset-specific features. Instead, it might work better to train a classifier from activations somewhere earlier in the network.</p>
+<p>New dataset is relatively large in size and very different in content compared to the original dataset: Since the dataset is very large, we may expect that we can afford to train a DCNN from scratch. However, in practice it is very often still beneficial to initialize with weights from a pre-trained model. In this case, we would have enough data and confidence to fine-tune through the entire network.<br>Fine-tuning DCNNs: For this DR prediction problem, we fall under scenario iv. We fine-tune the weights of the pre-trained DCNN by continuing the backpropagation. It is possible to fine-tune all the layers of the DCNN, or it?s possible to keep some of the earlier layers fixed (due to overfitting concerns) and only fine-tune some higher-level portion of the network. This is motivated by the observation that the earlier features of a DCNN contain more generic features (e.g. edge detectors or color blob detectors) that should be useful to many tasks, but later layers of the DCNN becomes progressively more specific to the details of the classes contained in the DR dataset.</p>
+<p>Transfer learning constraints: As we use a pre-trained network, we are slightly constrained in terms of the model architecture. For example, we can?t arbitrarily take out convolutional layers from the pre-trained network. However, due to parameter sharing, we can easily run a pre-trained network on images of different spatial size. This is clearly evident in the case of Convolutional and Pool layers because their forward function is independent of the input volume spatial size. In case of Fully Connected (FC) layers, this still holds true because FC layers can be converted to a Convolutional Layer.</p>
+<p>Learning rates: We use a smaller learning rate for DCNN weights that are being fine-tuned under the assumption that the pre-trained DCNN weights are relatively good. We don?t wish to distort them too quickly or too much, so we keep both our learning rate and learning rate decay really small.</p>
+<p>Data Augmentation: One of the drawbacks of non-regularized neural networks is that they are extremely flexible: they learn both features and noise equally well, increasing the potential for overfitting. In our model, we apply L2 regularization to avoid overfitting. But even after that, we observed a large gap in model performance on the training and validation DR images, indicating that the fine tuning process is overfitting to the training set. To combat this overfitting, we leverage data augmentation for the DR image dataset.</p>
+<p>There are many ways to do data augmentation, such as the popular horizontally flipping, random crops and color jittering. As the color information in these images is very important, we only rotate the images at different angles ? at 0, 90, 180, and 270 degrees.</p>
+<h2 id="Other-References"><a href="#Other-References" class="headerlink" title="Other References"></a>Other References</h2><p>Andrej Karpathy@cs231n also has an intuitive explanation on how we should employ transfer learning in practice. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/" data-id="citsql0az0002fps68toqiqm1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Deep-Learning-Resources" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/02/Deep-Learning-Resources/" class="article-date">
@@ -95,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Deep-Learning-Resources/" data-id="citsl084100031ks6qu7j1uys" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/02/Deep-Learning-Resources/" data-id="citsql0b60005fps6it00dwlg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -138,7 +189,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="citsl083w00011ks60fktj3c4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="citsql0b30004fps6c16d8o58" class="article-share-link">Share</a>
       
       
     </footer>
@@ -176,7 +227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/16/300w/" data-id="citsl083r00001ks6zqax1ubw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/16/300w/" data-id="citsql0as0000fps6p4lkp4nj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -224,7 +275,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="citsl084200041ks6qx45ci2p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="citsql0b20003fps63jjed6g8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -276,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/28/vanillacnn/" data-id="citsl084k00061ks6mdhgu6s8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/28/vanillacnn/" data-id="citsql0ba0007fps6dqgu25kf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -327,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="citsl083y00021ks67it1l0sy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="citsql0ax0001fps6nakk7jic" class="article-share-link">Share</a>
       
       
     </footer>
@@ -368,7 +419,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="citsl084300051ks6kiqjbskf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="citsql0b90006fps6fgd07vnu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -408,6 +459,10 @@
       <ul>
         
           <li>
+            <a href="/2016/10/02/Transfer-Learning-Tips/">Transfer_Learning_Tips</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/02/Deep-Learning-Resources/">Deep_Learning_Resources</a>
           </li>
         
@@ -421,10 +476,6 @@
         
           <li>
             <a href="/2016/07/19/Multitask-CNN/">Multitask_CNN</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/28/vanillacnn/">vanillacnn</a>
           </li>
         
       </ul>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Transfer_Learning_Tips | Random Thoughts on Deep Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="I came across a post which describes the common principles to follow when apply transfer learning or fine-tuning schemes to the CNN. 
+You can find the original post here.
+http://blog.revolutionanalyti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transfer_Learning_Tips">
+<meta property="og:url" content="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/index.html">
+<meta property="og:site_name" content="Random Thoughts on Deep Learning">
+<meta property="og:description" content="I came across a post which describes the common principles to follow when apply transfer learning or fine-tuning schemes to the CNN. 
+You can find the original post here.
+http://blog.revolutionanalyti">
+<meta property="og:updated_time" content="2016-10-02T14:42:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Transfer_Learning_Tips">
+<meta name="twitter:description" content="I came across a post which describes the common principles to follow when apply transfer learning or fine-tuning schemes to the CNN. 
+You can find the original post here.
+http://blog.revolutionanalyti">
+  
+    <link rel="alternate" href="/atom.xml" title="Random Thoughts on Deep Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Random Thoughts on Deep Learning</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Transfer-Learning-Tips" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/02/Transfer-Learning-Tips/" class="article-date">
+  <time datetime="2016-10-02T14:34:52.000Z" itemprop="datePublished">2016-10-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Transfer_Learning_Tips
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>I came across a post which describes the common principles to follow when apply transfer learning or fine-tuning schemes to the CNN. </p>
+<p>You can find the original post here.</p>
+<p><a href="http://blog.revolutionanalytics.com/2016/08/deep-learning-part-2.html" target="_blank" rel="external">http://blog.revolutionanalytics.com/2016/08/deep-learning-part-2.html</a></p>
+<p>In this post, I quoted some of his statements here. </p>
+<h2 id="Transfer-Learning-and-Fine-tuning-DCNNs"><a href="#Transfer-Learning-and-Fine-tuning-DCNNs" class="headerlink" title="Transfer Learning and Fine-tuning DCNNs"></a>Transfer Learning and Fine-tuning DCNNs</h2><p>In practice, we don?t usually train an entire DCNN from scratch with random initialization. This is because it is relatively rare to have a dataset of sufficient size that is required for the depth of network required. Instead, it is common to pre-train a DCNN on a very large dataset and then use the trained DCNN weights either as an initialization or a fixed feature extractor for the task of interest.</p>
+<p>Fine-Tuning: Transfer learning strategies depend on various factors, but the two most important ones are the size of the new dataset, and its similarity to the original dataset. Keeping in mind that DCNN features are more generic in early layers and more dataset-specific in later layers, there are four major scenarios:</p>
+<p>New dataset is smaller in size and similar in content compared to original dataset: If the data is small, it is not a good idea to fine-tune the DCNN due to overfitting concerns. Since the data is similar to the original data, we expect higher-level features in the DCNN to be relevant to this dataset as well. Hence, the best idea might be to train a linear classifier on the CNN-features.</p>
+<p>New dataset is relatively large in size and similar in content compared to the original dataset: Since we have more data, we can have more confidence that we would not over fit if we were to try to fine-tune through the full network.</p>
+<p>New dataset is smaller in size but very different in content compared to the original dataset: Since the data is small, it is likely best to only train a linear classifier. Since the dataset is very different, it might not be best to train the classifier from the top of the network, which contains more dataset-specific features. Instead, it might work better to train a classifier from activations somewhere earlier in the network.</p>
+<p>New dataset is relatively large in size and very different in content compared to the original dataset: Since the dataset is very large, we may expect that we can afford to train a DCNN from scratch. However, in practice it is very often still beneficial to initialize with weights from a pre-trained model. In this case, we would have enough data and confidence to fine-tune through the entire network.<br>Fine-tuning DCNNs: For this DR prediction problem, we fall under scenario iv. We fine-tune the weights of the pre-trained DCNN by continuing the backpropagation. It is possible to fine-tune all the layers of the DCNN, or it?s possible to keep some of the earlier layers fixed (due to overfitting concerns) and only fine-tune some higher-level portion of the network. This is motivated by the observation that the earlier features of a DCNN contain more generic features (e.g. edge detectors or color blob detectors) that should be useful to many tasks, but later layers of the DCNN becomes progressively more specific to the details of the classes contained in the DR dataset.</p>
+<p>Transfer learning constraints: As we use a pre-trained network, we are slightly constrained in terms of the model architecture. For example, we can?t arbitrarily take out convolutional layers from the pre-trained network. However, due to parameter sharing, we can easily run a pre-trained network on images of different spatial size. This is clearly evident in the case of Convolutional and Pool layers because their forward function is independent of the input volume spatial size. In case of Fully Connected (FC) layers, this still holds true because FC layers can be converted to a Convolutional Layer.</p>
+<p>Learning rates: We use a smaller learning rate for DCNN weights that are being fine-tuned under the assumption that the pre-trained DCNN weights are relatively good. We don?t wish to distort them too quickly or too much, so we keep both our learning rate and learning rate decay really small.</p>
+<p>Data Augmentation: One of the drawbacks of non-regularized neural networks is that they are extremely flexible: they learn both features and noise equally well, increasing the potential for overfitting. In our model, we apply L2 regularization to avoid overfitting. But even after that, we observed a large gap in model performance on the training and validation DR images, indicating that the fine tuning process is overfitting to the training set. To combat this overfitting, we leverage data augmentation for the DR image dataset.</p>
+<p>There are many ways to do data augmentation, such as the popular horizontally flipping, random crops and color jittering. As the color information in these images is very important, we only rotate the images at different angles ? at 0, 90, 180, and 270 degrees.</p>
+<h2 id="Other-References"><a href="#Other-References" class="headerlink" title="Other References"></a>Other References</h2><p>Andrej Karpathy@cs231n also has an intuitive explanation on how we should employ transfer learning in practice. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/" data-id="citsql0az0002fps68toqiqm1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/02/Deep-Learning-Resources/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Deep_Learning_Resources</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/02/Transfer-Learning-Tips/">Transfer_Learning_Tips</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/02/Deep-Learning-Resources/">Deep_Learning_Resources</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/02/Bay-Area-DeepLearning/">Bay_Area_DeepLearning</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/16/300w/">300w</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/19/Multitask-CNN/">Multitask_CNN</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Cunjian Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
