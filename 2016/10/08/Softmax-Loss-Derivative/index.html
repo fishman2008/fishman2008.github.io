@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>Softmax-Loss Derivative | Random Thoughts on Deep Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Back propagation is the backbone of the deep learning framework. To understand the principles of BP, I have provided a simple example to compute the derivative of Softmax-loss.
+$$\begin{aligned}
+L_{i}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Softmax-Loss Derivative">
+<meta property="og:url" content="http://yoursite.com/2016/10/08/Softmax-Loss-Derivative/index.html">
+<meta property="og:site_name" content="Random Thoughts on Deep Learning">
+<meta property="og:description" content="Back propagation is the backbone of the deep learning framework. To understand the principles of BP, I have provided a simple example to compute the derivative of Softmax-loss.
+$$\begin{aligned}
+L_{i}">
+<meta property="og:updated_time" content="2016-10-08T14:26:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Softmax-Loss Derivative">
+<meta name="twitter:description" content="Back propagation is the backbone of the deep learning framework. To understand the principles of BP, I have provided a simple example to compute the derivative of Softmax-loss.
+$$\begin{aligned}
+L_{i}">
+  
+    <link rel="alternate" href="/atom.xml" title="Random Thoughts on Deep Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Random Thoughts on Deep Learning</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Softmax-Loss-Derivative" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/08/Softmax-Loss-Derivative/" class="article-date">
+  <time datetime="2016-10-08T13:14:19.000Z" itemprop="datePublished">2016-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Softmax-Loss Derivative
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Back propagation is the backbone of the deep learning framework. To understand the principles of BP, I have provided a simple example to compute the derivative of Softmax-loss.</p>
+<span>$$\begin{aligned}
+L_{i} &amp; = -log(p_{y_{i}}) \\
+\end{aligned}$$</span><!-- Has MathJax -->
+<span>$$\begin{aligned}
+p_{k} &amp; = \frac{e^{f_{k}}}{\sum_{j}{e^{f_{j}}}} \\
+\end{aligned}$$</span><!-- Has MathJax -->
+<p>First, substitute <span>$p_{y_{i}}$</span><!-- Has MathJax -->  to obtain,<br><span>$$\begin{aligned}
+L_{i} &amp; = -log(p_{y_{i}}) \\
+        &amp; = -log\frac{e^{f_{y_{i}}}}{\sum_{j}(e^{f_{j}})}\\
+        &amp; = - (f_{y_{i}}-log\sum_{j}e^{f_{j}})\\
+        &amp; = log\sum_{j}e^{f_{j}}-f_{y_{i}}
+\end{aligned}$$</span><!-- Has MathJax --><br>Then compute the derivative of <span>$L_{i}$</span><!-- Has MathJax --> with respect to <span>$f_{k}$</span><!-- Has MathJax -->,<br>\begin{aligned}<br>\frac{\partial L_{i}}{\partial f_k} &amp; = \frac{\partial log \sum_j e^{f_j}}{\partial f_k}-\frac{\partial f_y}{\partial f_k} \\<br> &amp; = \frac{1}{\sum_j e^{f_j}} (\sum_j e^{f_j})’- l(y_i=k) \\<br> &amp; = \frac{e^{f_k}}{\sum_j e^{f_j}}-l (y_i=k) \\<br> &amp; = p_k- l (y_i=k)<br>\end{aligned}<br>It is noted that the <span>$f_{y}$</span><!-- Has MathJax --> should be <span>$f_{y_{i}}$</span><!-- Has MathJax -->, due to problem with hexo math. </p>
+<p>The derived equation conforms with the expression in cs231n.<br><a href="http://cs231n.github.io/neural-networks-case-study/#loss" target="_blank" rel="external">http://cs231n.github.io/neural-networks-case-study/#loss</a></p>
+<p>However, there actually exists a more complex derivation, which has been well explained in,<br><a href="http://freemind.pluskid.org/machine-learning/softmax-vs-softmax-loss-numerical-stability/#disqus_thread" target="_blank" rel="external">http://freemind.pluskid.org/machine-learning/softmax-vs-softmax-loss-numerical-stability/#disqus_thread</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/08/Softmax-Loss-Derivative/" data-id="ciu18xdrh0002mus612ha3vz3" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/02/Transfer-Learning-Tips/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">Transfer_Learning_Tips</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/08/Softmax-Loss-Derivative/">Softmax-Loss Derivative</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/02/Transfer-Learning-Tips/">Transfer_Learning_Tips</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/02/Deep-Learning-Resources/">Deep_Learning_Resources</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/02/Bay-Area-DeepLearning/">Bay_Area_DeepLearning</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/16/300w/">300w</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Cunjian Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

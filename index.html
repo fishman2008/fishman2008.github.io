@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <title>Random Thoughts on Deep Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -23,13 +23,13 @@
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 </head>
 
 <body>
-  <div id="container">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
     <div id="wrap">
       <header id="header">
   <div id="banner"></div>
@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -63,6 +63,57 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Softmax-Loss-Derivative" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/08/Softmax-Loss-Derivative/" class="article-date">
+  <time datetime="2016-10-08T13:14:19.000Z" itemprop="datePublished">2016-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/08/Softmax-Loss-Derivative/">Softmax-Loss Derivative</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Back propagation is the backbone of the deep learning framework. To understand the principles of BP, I have provided a simple example to compute the derivative of Softmax-loss.</p>
+<span>$$\begin{aligned}
+L_{i} &amp; = -log(p_{y_{i}}) \\
+\end{aligned}$$</span><!-- Has MathJax -->
+<span>$$\begin{aligned}
+p_{k} &amp; = \frac{e^{f_{k}}}{\sum_{j}{e^{f_{j}}}} \\
+\end{aligned}$$</span><!-- Has MathJax -->
+<p>First, substitute <span>$p_{y_{i}}$</span><!-- Has MathJax -->  to obtain,<br><span>$$\begin{aligned}
+L_{i} &amp; = -log(p_{y_{i}}) \\
+        &amp; = -log\frac{e^{f_{y_{i}}}}{\sum_{j}(e^{f_{j}})}\\
+        &amp; = - (f_{y_{i}}-log\sum_{j}e^{f_{j}})\\
+        &amp; = log\sum_{j}e^{f_{j}}-f_{y_{i}}
+\end{aligned}$$</span><!-- Has MathJax --><br>Then compute the derivative of <span>$L_{i}$</span><!-- Has MathJax --> with respect to <span>$f_{k}$</span><!-- Has MathJax -->,<br>\begin{aligned}<br>\frac{\partial L_{i}}{\partial f_k} &amp; = \frac{\partial log \sum_j e^{f_j}}{\partial f_k}-\frac{\partial f_y}{\partial f_k} \\<br> &amp; = \frac{1}{\sum_j e^{f_j}} (\sum_j e^{f_j})’- l(y_i=k) \\<br> &amp; = \frac{e^{f_k}}{\sum_j e^{f_j}}-l (y_i=k) \\<br> &amp; = p_k- l (y_i=k)<br>\end{aligned}<br>It is noted that the <span>$f_{y}$</span><!-- Has MathJax --> should be <span>$f_{y_{i}}$</span><!-- Has MathJax -->, due to problem with hexo math. </p>
+<p>The derived equation conforms with the expression in cs231n.<br><a href="http://cs231n.github.io/neural-networks-case-study/#loss" target="_blank" rel="external">http://cs231n.github.io/neural-networks-case-study/#loss</a></p>
+<p>However, there actually exists a more complex derivation, which has been well explained in,<br><a href="http://freemind.pluskid.org/machine-learning/softmax-vs-softmax-loss-numerical-stability/#disqus_thread" target="_blank" rel="external">http://freemind.pluskid.org/machine-learning/softmax-vs-softmax-loss-numerical-stability/#disqus_thread</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/08/Softmax-Loss-Derivative/" data-id="ciu18xdrh0002mus612ha3vz3" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Transfer-Learning-Tips" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -105,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/" data-id="citwojjrd00043ws6iwjyyrgz" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/" data-id="ciu18xdrs0006mus6fkjaafoe" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -148,7 +199,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Deep-Learning-Resources/" data-id="citwojjr600013ws62wsswuas" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/02/Deep-Learning-Resources/" data-id="ciu18xdrm0004mus627bvraua" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -191,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="citwojjr200003ws660w29iqn" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="ciu18xdr90000mus6izdzfx0p" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -229,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/16/300w/" data-id="citwojjrl00073ws65qkbo0uw" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/08/16/300w/" data-id="ciu18xdre0001mus6wlax0z2o" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -277,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="citwojjrb00033ws6aa8cgbqp" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="ciu18xdrp0005mus6a3drgq13" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -329,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/28/vanillacnn/" data-id="citwojjrg00053ws6kzyl4gca" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/06/28/vanillacnn/" data-id="ciu18xdrw0008mus62vqm0yab" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -380,7 +431,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="citwojjr900023ws63sn10z9b" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="ciu18xdrk0003mus6a1jxz3if" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -421,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="citwojjri00063ws6strbaltx" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="ciu18xdrt0007mus6hw4k5ni8" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -446,7 +497,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
     </div>
@@ -456,9 +507,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/10/08/Softmax-Loss-Derivative/">Softmax-Loss Derivative</a>
+          </li>
         
           <li>
             <a href="/2016/10/02/Transfer-Learning-Tips/">Transfer_Learning_Tips</a>
@@ -476,10 +531,6 @@
             <a href="/2016/08/16/300w/">300w</a>
           </li>
         
-          <li>
-            <a href="/2016/07/19/Multitask-CNN/">Multitask_CNN</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -493,7 +544,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Cunjian Chen<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
@@ -516,6 +567,23 @@
 
 <script src="/js/script.js"></script>
 
-  </div>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>
