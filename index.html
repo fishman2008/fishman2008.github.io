@@ -53,7 +53,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -63,6 +63,63 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-A-toy-example-with-DL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/08/A-toy-example-with-DL/" class="article-date">
+  <time datetime="2016-10-08T14:46:41.000Z" itemprop="datePublished">2016-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/08/A-toy-example-with-DL/">A toy example with DL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>In the course of cs231n, there is a toy example which conveys the idea of how back propagation works. I found this one to be particularly interesting. </p>
+<h2 id="A-toy-example"><a href="#A-toy-example" class="headerlink" title="A toy example"></a>A toy example</h2><p>import numpy as np<br>import matplotlib as plt</p>
+<p>N = 100 # number of points per class<br>D = 2 # dimensionality<br>K = 3 # number of classes<br>X = np.zeros((N<em>K,D)) # data matrix (each row = single example)<br>y = np.zeros(N</em>K, dtype=’uint8’) # class labels<br>for j in xrange(K):<br>  ix = range(N<em>j,N</em>(j+1))<br>  r = np.linspace(0.0,1,N) # radius<br>  t = np.linspace(j<em>4,(j+1)</em>4,N) + np.random.randn(N)<em>0.2 # theta<br>  X[ix] = np.c_[r</em>np.sin(t), r*np.cos(t)]<br>  y[ix] = j</p>
+<p>h = 100 # size of hidden layer<br>W = 0.01 <em> np.random.randn(D,h)<br>b = np.zeros((1,h))<br>W2 = 0.01 </em> np.random.randn(h,K)<br>b2 = np.zeros((1,K))</p>
+<p>step_size = 1e-0<br>reg = 1e-3 # regularization strength</p>
+<p>% gradient descent loop<br>num_examples = X.shape[0]<br>for i in xrange(10000):</p>
+<p>  % evaluate class scores, [N x K]<br>  hidden_layer = np.maximum(0, np.dot(X, W) + b) # note, ReLU activation<br>  scores = np.dot(hidden_layer, W2) + b2</p>
+<p>  % compute the class probabilities<br>  exp_scores = np.exp(scores)<br>  probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True) # [N x K]</p>
+<p>  % compute the loss: average cross-entropy loss and regularization<br>  corect_logprobs = -np.log(probs[range(num_examples),y])<br>  data_loss = np.sum(corect_logprobs)/num_examples<br>  reg_loss = 0.5<em>reg</em>np.sum(W<em>W) + 0.5</em>reg<em>np.sum(W2</em>W2)<br>  loss = data_loss + reg_loss<br>  if i % 1000 == 0:<br>    print “iteration %d: loss %f” % (i, loss)</p>
+<p>  % compute the gradient on scores<br>  dscores = probs<br>  dscores[range(num_examples),y] -= 1<br>  dscores /= num_examples</p>
+<p>  % backpropate the gradient to the parameters<br>  % first backprop into parameters W2 and b2<br>  dW2 = np.dot(hidden_layer.T, dscores)<br>  db2 = np.sum(dscores, axis=0, keepdims=True)<br>  % next backprop into hidden layer<br>  dhidden = np.dot(dscores, W2.T)<br>  % backprop the ReLU non-linearity<br>  dhidden[hidden_layer &lt;= 0] = 0<br>  % finally into W,b<br>  dW = np.dot(X.T, dhidden)<br>  db = np.sum(dhidden, axis=0, keepdims=True)</p>
+<p>  % add regularization gradient contribution<br>  dW2 += reg <em> W2<br>  dW += reg </em> W</p>
+<p>  % perform a parameter update<br>  W += -step_size <em> dW<br>  b += -step_size </em> db<br>  W2 += -step_size <em> dW2<br>  b2 += -step_size </em> db2</p>
+<p>% evaluate training set accuracy<br>hidden_layer = np.maximum(0, np.dot(X, W) + b) # note, ReLU activation<br>scores = np.dot(hidden_layer, W2) + b2<br>predicted_class = np.argmax(scores, axis=1)<br>print ‘training accuracy: %.2f’ % (np.mean(predicted_class == y))</p>
+<h2 id="Learned-Lessons"><a href="#Learned-Lessons" class="headerlink" title="Learned Lessons"></a>Learned Lessons</h2><p>Original code sample is given in the following link.<br><a href="http://cs231n.github.io/neural-networks-case-study/#loss" target="_blank" rel="external">http://cs231n.github.io/neural-networks-case-study/#loss</a></p>
+<ol>
+<li>Weights are updated layer by layer, same as caffe where learning rate is specified for each weight blob</li>
+<li>When initialized with small weights, the loss probability for a given class is np.log(1.0/3), for a 3-class case; This is useful to check if the network runs properly. </li>
+<li>step_size is the learning rate, which can adjusted in each iteration</li>
+</ol>
+<p>With the above example, you can easily add more hidden layers and change the activation function. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/08/A-toy-example-with-DL/" data-id="ciu1bgb0t0000r7s6ssvwcccd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Softmax-Loss-Derivative" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -105,7 +162,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/08/Softmax-Loss-Derivative/" data-id="ciu18xdrh0002mus612ha3vz3" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/10/08/Softmax-Loss-Derivative/" data-id="ciu1bgb120003r7s69zdfmz10" class="article-share-link">Share</a>
       
       
     </footer>
@@ -156,7 +213,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/" data-id="ciu18xdrs0006mus6fkjaafoe" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/" data-id="ciu1bgb1b0007r7s6osqbp0f8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -199,7 +256,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Deep-Learning-Resources/" data-id="ciu18xdrm0004mus627bvraua" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/10/02/Deep-Learning-Resources/" data-id="ciu1bgb190006r7s6iqxehmgh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -242,7 +299,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="ciu18xdr90000mus6izdzfx0p" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="ciu1bgb0y0001r7s6stt6wl2h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -280,7 +337,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/16/300w/" data-id="ciu18xdre0001mus6wlax0z2o" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/08/16/300w/" data-id="ciu1bgb100002r7s6tobru77d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -328,7 +385,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="ciu18xdrp0005mus6a3drgq13" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="ciu1bgb160005r7s6k4mv7f7t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -380,7 +437,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/28/vanillacnn/" data-id="ciu18xdrw0008mus62vqm0yab" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/06/28/vanillacnn/" data-id="ciu1bgb1f0009r7s6e48xzrsy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -431,7 +488,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="ciu18xdrk0003mus6a1jxz3if" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="ciu1bgb140004r7s6p8nrh8xw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -472,7 +529,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="ciu18xdrt0007mus6hw4k5ni8" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="ciu1bgb1c0008r7s6rpjdv65e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -497,7 +554,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
     </div>
@@ -507,9 +564,13 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/10/08/A-toy-example-with-DL/">A toy example with DL</a>
+          </li>
         
           <li>
             <a href="/2016/10/08/Softmax-Loss-Derivative/">Softmax-Loss Derivative</a>
@@ -525,10 +586,6 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
         
           <li>
             <a href="/2016/10/02/Bay-Area-DeepLearning/">Bay_Area_DeepLearning</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/16/300w/">300w</a>
           </li>
         
       </ul>

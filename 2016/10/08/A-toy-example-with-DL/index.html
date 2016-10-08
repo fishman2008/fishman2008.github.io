@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>A toy example with DL | Random Thoughts on Deep Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="In the course of cs231n, there is a toy example which conveys the idea of how back propagation works. I found this one to be particularly interesting. 
+A toy exampleimport numpy as npimport matplotlib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A toy example with DL">
+<meta property="og:url" content="http://yoursite.com/2016/10/08/A-toy-example-with-DL/index.html">
+<meta property="og:site_name" content="Random Thoughts on Deep Learning">
+<meta property="og:description" content="In the course of cs231n, there is a toy example which conveys the idea of how back propagation works. I found this one to be particularly interesting. 
+A toy exampleimport numpy as npimport matplotlib">
+<meta property="og:updated_time" content="2016-10-08T15:08:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A toy example with DL">
+<meta name="twitter:description" content="In the course of cs231n, there is a toy example which conveys the idea of how back propagation works. I found this one to be particularly interesting. 
+A toy exampleimport numpy as npimport matplotlib">
+  
+    <link rel="alternate" href="/atom.xml" title="Random Thoughts on Deep Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Random Thoughts on Deep Learning</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-A-toy-example-with-DL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/08/A-toy-example-with-DL/" class="article-date">
+  <time datetime="2016-10-08T14:46:41.000Z" itemprop="datePublished">2016-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      A toy example with DL
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>In the course of cs231n, there is a toy example which conveys the idea of how back propagation works. I found this one to be particularly interesting. </p>
+<h2 id="A-toy-example"><a href="#A-toy-example" class="headerlink" title="A toy example"></a>A toy example</h2><p>import numpy as np<br>import matplotlib as plt</p>
+<p>N = 100 # number of points per class<br>D = 2 # dimensionality<br>K = 3 # number of classes<br>X = np.zeros((N<em>K,D)) # data matrix (each row = single example)<br>y = np.zeros(N</em>K, dtype=’uint8’) # class labels<br>for j in xrange(K):<br>  ix = range(N<em>j,N</em>(j+1))<br>  r = np.linspace(0.0,1,N) # radius<br>  t = np.linspace(j<em>4,(j+1)</em>4,N) + np.random.randn(N)<em>0.2 # theta<br>  X[ix] = np.c_[r</em>np.sin(t), r*np.cos(t)]<br>  y[ix] = j</p>
+<p>h = 100 # size of hidden layer<br>W = 0.01 <em> np.random.randn(D,h)<br>b = np.zeros((1,h))<br>W2 = 0.01 </em> np.random.randn(h,K)<br>b2 = np.zeros((1,K))</p>
+<p>step_size = 1e-0<br>reg = 1e-3 # regularization strength</p>
+<p>% gradient descent loop<br>num_examples = X.shape[0]<br>for i in xrange(10000):</p>
+<p>  % evaluate class scores, [N x K]<br>  hidden_layer = np.maximum(0, np.dot(X, W) + b) # note, ReLU activation<br>  scores = np.dot(hidden_layer, W2) + b2</p>
+<p>  % compute the class probabilities<br>  exp_scores = np.exp(scores)<br>  probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True) # [N x K]</p>
+<p>  % compute the loss: average cross-entropy loss and regularization<br>  corect_logprobs = -np.log(probs[range(num_examples),y])<br>  data_loss = np.sum(corect_logprobs)/num_examples<br>  reg_loss = 0.5<em>reg</em>np.sum(W<em>W) + 0.5</em>reg<em>np.sum(W2</em>W2)<br>  loss = data_loss + reg_loss<br>  if i % 1000 == 0:<br>    print “iteration %d: loss %f” % (i, loss)</p>
+<p>  % compute the gradient on scores<br>  dscores = probs<br>  dscores[range(num_examples),y] -= 1<br>  dscores /= num_examples</p>
+<p>  % backpropate the gradient to the parameters<br>  % first backprop into parameters W2 and b2<br>  dW2 = np.dot(hidden_layer.T, dscores)<br>  db2 = np.sum(dscores, axis=0, keepdims=True)<br>  % next backprop into hidden layer<br>  dhidden = np.dot(dscores, W2.T)<br>  % backprop the ReLU non-linearity<br>  dhidden[hidden_layer &lt;= 0] = 0<br>  % finally into W,b<br>  dW = np.dot(X.T, dhidden)<br>  db = np.sum(dhidden, axis=0, keepdims=True)</p>
+<p>  % add regularization gradient contribution<br>  dW2 += reg <em> W2<br>  dW += reg </em> W</p>
+<p>  % perform a parameter update<br>  W += -step_size <em> dW<br>  b += -step_size </em> db<br>  W2 += -step_size <em> dW2<br>  b2 += -step_size </em> db2</p>
+<p>% evaluate training set accuracy<br>hidden_layer = np.maximum(0, np.dot(X, W) + b) # note, ReLU activation<br>scores = np.dot(hidden_layer, W2) + b2<br>predicted_class = np.argmax(scores, axis=1)<br>print ‘training accuracy: %.2f’ % (np.mean(predicted_class == y))</p>
+<h2 id="Learned-Lessons"><a href="#Learned-Lessons" class="headerlink" title="Learned Lessons"></a>Learned Lessons</h2><p>Original code sample is given in the following link.<br><a href="http://cs231n.github.io/neural-networks-case-study/#loss" target="_blank" rel="external">http://cs231n.github.io/neural-networks-case-study/#loss</a></p>
+<ol>
+<li>Weights are updated layer by layer, same as caffe where learning rate is specified for each weight blob</li>
+<li>When initialized with small weights, the loss probability for a given class is np.log(1.0/3), for a 3-class case; This is useful to check if the network runs properly. </li>
+<li>step_size is the learning rate, which can adjusted in each iteration</li>
+</ol>
+<p>With the above example, you can easily add more hidden layers and change the activation function. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/08/A-toy-example-with-DL/" data-id="ciu1bgb0t0000r7s6ssvwcccd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/08/Softmax-Loss-Derivative/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Softmax-Loss Derivative</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/08/A-toy-example-with-DL/">A toy example with DL</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/08/Softmax-Loss-Derivative/">Softmax-Loss Derivative</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/02/Transfer-Learning-Tips/">Transfer_Learning_Tips</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/02/Deep-Learning-Resources/">Deep_Learning_Resources</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/02/Bay-Area-DeepLearning/">Bay_Area_DeepLearning</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Cunjian Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
