@@ -64,6 +64,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Cross-entropy-Loss-and-Softmax-Classifier" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/23/Cross-entropy-Loss-and-Softmax-Classifier/" class="article-date">
+  <time datetime="2016-10-23T08:06:30.000Z" itemprop="datePublished">2016-10-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/23/Cross-entropy-Loss-and-Softmax-Classifier/">Cross-entropy Loss and Softmax Classifier</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Cross-entropy loss is a commonly adopted loss function for classification task, which involves the use of Softmax classifier.</p>
+<p>Technically, the cross-entropy loss is defined as the cross-entropy between a true distribution p and an estimated distribution q <a href="http://cs231n.github.io/linear-classify/#softmax" target="_blank" rel="external">1</a>:</p>
+<span>$$\begin{aligned}
+H(p,q)=-\sum_{x}p(x)log(q(x)) \\
+\end{aligned}$$</span><!-- Has MathJax -->
+<p>Hence, the objective of Softmax classifier is to minimize the cross-entropy between the estimated distribution and the true distribution. For instance, the loss of a training example can be calculated according to the following equation <a href="http://cs224d.stanford.edu/lecture_notes/notes2.pdf" target="_blank" rel="external">2</a>:</p>
+<span>$$\begin{aligned}
+-\sum_{j=1}^{C} y_{j} log(q(y_j=1|x))=-\sum_{j=1}^{C} y_{j} log (\frac{exp(W_j x)}{\sum_{c=1}^{C} exp(W_cx)}) \\
+\end{aligned}$$</span><!-- Has MathJax -->
+<p>where,<br><span>$$\begin{aligned}
+q(y_j=1|x)=\frac{exp(W_j x)}{\sum_{c=1}^{C} exp(W_cx)}\\
+\end{aligned}$$</span><!-- Has MathJax --><br>p(x) has the following distribution p=[0,…,1,…,0]. y_j=1 is 1 only if sample x belongs to the correct class. Therefore, this equation can be simplified as <a href="http://cs224d.stanford.edu/lecture_notes/notes2.pdf" target="_blank" rel="external">2</a>,<br><span>$$\begin{aligned}
+-log(\frac{exp(W_{k}x)}{\sum_{c=1}^{C}exp(W_c x)})\\
+\end{aligned}$$</span><!-- Has MathJax --><br>This is basically the minimization of negative log likelihood. In practice, Softmax classifier works in this way. First, it applies the Softmax function to normalize the scores to obtain probabilities. Then, it computes the negative log likelihood of these probabilities. And finally, the summation of these negative log likelihoods is minimized. Oftentimes, people also use Softmax loss and cross-entropy loss interchangeably. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/23/Cross-entropy-Loss-and-Softmax-Classifier/" data-id="ciumehztt0001zds6uibdq3se" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-A-toy-example-with-DL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/08/A-toy-example-with-DL/" class="article-date">
@@ -111,7 +161,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/08/A-toy-example-with-DL/" data-id="ciu1bgb0t0000r7s6ssvwcccd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/08/A-toy-example-with-DL/" data-id="ciumehzu60004zds65znsd0cn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +212,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/08/Softmax-Loss-Derivative/" data-id="ciu1bgb120003r7s69zdfmz10" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/08/Softmax-Loss-Derivative/" data-id="ciumehzur0008zds6q1kbeeap" class="article-share-link">Share</a>
       
       
     </footer>
@@ -213,7 +263,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/" data-id="ciu1bgb1b0007r7s6osqbp0f8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/" data-id="ciumehzuo0007zds6n1otjvrg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -257,7 +307,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Deep-Learning-Resources/" data-id="ciu1bgb190006r7s6iqxehmgh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/02/Deep-Learning-Resources/" data-id="ciumehzua0005zds6m7x2jg7f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -300,7 +350,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="ciu1bgb0y0001r7s6stt6wl2h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="ciumehzu30003zds6lngjt0mx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -338,7 +388,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/16/300w/" data-id="ciu1bgb100002r7s6tobru77d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/16/300w/" data-id="ciumehztj0000zds60kxl7s73" class="article-share-link">Share</a>
       
       
     </footer>
@@ -386,7 +436,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="ciu1bgb160005r7s6k4mv7f7t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="ciumehzue0006zds678at83lb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -438,7 +488,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/28/vanillacnn/" data-id="ciu1bgb1f0009r7s6e48xzrsy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/28/vanillacnn/" data-id="ciumehzuz0009zds6pokblug2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -489,48 +539,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="ciu1bgb140004r7s6p8nrh8xw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/17/hello-world/" class="article-date">
-  <time datetime="2016-06-17T14:26:44.000Z" itemprop="datePublished">2016-06-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/17/hello-world/">Caffe Visualization</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>The visualization of deep learning network is very helpful to understand the global structure of how the network is evolved. Fortunately, caffe has already provided such a tool to visualize the network, namely via plotting the nets defined in prototxt file. </p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Install-the-graphviz"><a href="#Install-the-graphviz" class="headerlink" title="Install the graphviz"></a>Install the graphviz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pip install pydot</span><br><span class="line">$ sudo apt-get instll graphviz</span><br></pre></td></tr></table></figure>
-<h3 id="Execute-the-commands"><a href="#Execute-the-commands" class="headerlink" title="Execute the commands"></a>Execute the commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> caffe/examples</span><br><span class="line">$ python python/draw_net.py  yourPath.prototxt yourNetwork.name</span><br></pre></td></tr></table></figure>
-<h2 id="Visualization-Results"><a href="#Visualization-Results" class="headerlink" title="Visualization Results"></a>Visualization Results</h2><p>I have plotted two CNN networks which have been used to perform face landmark detection. The task of face landmark detection uses HDF5 format to store the input and switch the last layer of classifier to regression. </p>
-<p><img src="img/cascade_cnn.jpg" alt="CNN network used in luoyetx@github.com"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="ciu1bgb1c0008r7s6rpjdv65e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/20/CNN-for-Facial-Point-Detection/" data-id="ciumehztx0002zds6khq6ef87" class="article-share-link">Share</a>
       
       
     </footer>
@@ -541,6 +550,10 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
 
   
 
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -570,6 +583,10 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       <ul>
         
           <li>
+            <a href="/2016/10/23/Cross-entropy-Loss-and-Softmax-Classifier/">Cross-entropy Loss and Softmax Classifier</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/08/A-toy-example-with-DL/">A toy example with DL</a>
           </li>
         
@@ -583,10 +600,6 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
         
           <li>
             <a href="/2016/10/02/Deep-Learning-Resources/">Deep_Learning_Resources</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/02/Bay-Area-DeepLearning/">Bay_Area_DeepLearning</a>
           </li>
         
       </ul>

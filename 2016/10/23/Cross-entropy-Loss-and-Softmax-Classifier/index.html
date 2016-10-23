@@ -3,30 +3,21 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Bay_Area_DeepLearning | Random Thoughts on Deep Learning</title>
+  <title>Cross-entropy Loss and Softmax Classifier | Random Thoughts on Deep Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I have spent the weekend to watch the video lectures given on Bay Area Deep Learning School and here are some thoughts that found to be particularly interesting, as illustrated below. 
-
-
-Here is the a">
+  <meta name="description" content="Cross-entropy loss is a commonly adopted loss function for classification task, which involves the use of Softmax classifier.
+Technically, the cross-entropy loss is defined as the cross-entropy betwee">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Bay_Area_DeepLearning">
-<meta property="og:url" content="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/index.html">
+<meta property="og:title" content="Cross-entropy Loss and Softmax Classifier">
+<meta property="og:url" content="http://yoursite.com/2016/10/23/Cross-entropy-Loss-and-Softmax-Classifier/index.html">
 <meta property="og:site_name" content="Random Thoughts on Deep Learning">
-<meta property="og:description" content="I have spent the weekend to watch the video lectures given on Bay Area Deep Learning School and here are some thoughts that found to be particularly interesting, as illustrated below. 
-
-
-Here is the a">
-<meta property="og:image" content="http://yoursite.com/img/20161002/dl_practice.png">
-<meta property="og:image" content="http://yoursite.com/img/20161002/dl_career.png">
-<meta property="og:updated_time" content="2016-10-02T12:03:57.000Z">
+<meta property="og:description" content="Cross-entropy loss is a commonly adopted loss function for classification task, which involves the use of Softmax classifier.
+Technically, the cross-entropy loss is defined as the cross-entropy betwee">
+<meta property="og:updated_time" content="2016-10-23T08:57:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bay_Area_DeepLearning">
-<meta name="twitter:description" content="I have spent the weekend to watch the video lectures given on Bay Area Deep Learning School and here are some thoughts that found to be particularly interesting, as illustrated below. 
-
-
-Here is the a">
-<meta name="twitter:image" content="http://yoursite.com/img/20161002/dl_practice.png">
+<meta name="twitter:title" content="Cross-entropy Loss and Softmax Classifier">
+<meta name="twitter:description" content="Cross-entropy loss is a commonly adopted loss function for classification task, which involves the use of Softmax classifier.
+Technically, the cross-entropy loss is defined as the cross-entropy betwee">
   
     <link rel="alternate" href="/atom.xml" title="Random Thoughts on Deep Learning" type="application/atom+xml">
   
@@ -75,10 +66,10 @@ Here is the a">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Bay-Area-DeepLearning" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Cross-entropy-Loss-and-Softmax-Classifier" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/10/02/Bay-Area-DeepLearning/" class="article-date">
-  <time datetime="2016-10-02T03:44:01.000Z" itemprop="datePublished">2016-10-02</time>
+    <a href="/2016/10/23/Cross-entropy-Loss-and-Softmax-Classifier/" class="article-date">
+  <time datetime="2016-10-23T08:06:30.000Z" itemprop="datePublished">2016-10-23</time>
 </a>
     
   </div>
@@ -89,7 +80,7 @@ Here is the a">
         
   
     <h1 class="article-title" itemprop="name">
-      Bay_Area_DeepLearning
+      Cross-entropy Loss and Softmax Classifier
     </h1>
   
 
@@ -97,18 +88,25 @@ Here is the a">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>I have spent the weekend to watch the video lectures given on Bay Area Deep Learning School and here are some thoughts that found to be particularly interesting, as illustrated below. </p>
-<p><img src="img/20161002/dl_practice.png" alt="Deep Learning in Practice"></p>
-<p><img src="img/20161002/dl_career.png" alt="Deep Learning Career Path"></p>
-<p>Here is the address to watch the video.</p>
-<p><a href="https://www.youtube.com/watch?v=eyovmAtoUx0" target="_blank" rel="external">https://www.youtube.com/watch?v=eyovmAtoUx0</a></p>
-<p>There is also a very nice article which summarizes the notes made by Andrew Ng.</p>
-<p><a href="https://kevinzakka.github.io/2016/09/26/applying-deep-learning/" target="_blank" rel="external">https://kevinzakka.github.io/2016/09/26/applying-deep-learning/</a></p>
+        <p>Cross-entropy loss is a commonly adopted loss function for classification task, which involves the use of Softmax classifier.</p>
+<p>Technically, the cross-entropy loss is defined as the cross-entropy between a true distribution p and an estimated distribution q <a href="http://cs231n.github.io/linear-classify/#softmax" target="_blank" rel="external">1</a>:</p>
+<span>$$\begin{aligned}
+H(p,q)=-\sum_{x}p(x)log(q(x)) \\
+\end{aligned}$$</span><!-- Has MathJax -->
+<p>Hence, the objective of Softmax classifier is to minimize the cross-entropy between the estimated distribution and the true distribution. For instance, the loss of a training example can be calculated according to the following equation <a href="http://cs224d.stanford.edu/lecture_notes/notes2.pdf" target="_blank" rel="external">2</a>:</p>
+<span>$$\begin{aligned}
+-\sum_{j=1}^{C} y_{j} log(q(y_j=1|x))=-\sum_{j=1}^{C} y_{j} log (\frac{exp(W_j x)}{\sum_{c=1}^{C} exp(W_cx)}) \\
+\end{aligned}$$</span><!-- Has MathJax -->
+<p>where,<br><span>$$\begin{aligned}
+q(y_j=1|x)=\frac{exp(W_j x)}{\sum_{c=1}^{C} exp(W_cx)}\\
+\end{aligned}$$</span><!-- Has MathJax --><br>p(x) has the following distribution p=[0,…,1,…,0]. y_j=1 is 1 only if sample x belongs to the correct class. Therefore, this equation can be simplified as <a href="http://cs224d.stanford.edu/lecture_notes/notes2.pdf" target="_blank" rel="external">2</a>,<br><span>$$\begin{aligned}
+-log(\frac{exp(W_{k}x)}{\sum_{c=1}^{C}exp(W_c x)})\\
+\end{aligned}$$</span><!-- Has MathJax --><br>This is basically the minimization of negative log likelihood. In practice, Softmax classifier works in this way. First, it applies the Softmax function to normalize the scores to obtain probabilities. Then, it computes the negative log likelihood of these probabilities. And finally, the summation of these negative log likelihoods is minimized. Oftentimes, people also use Softmax loss and cross-entropy loss interchangeably. </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="ciumehzu30003zds6lngjt0mx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/23/Cross-entropy-Loss-and-Softmax-Classifier/" data-id="ciumehztt0001zds6uibdq3se" class="article-share-link">Share</a>
       
       
     </footer>
@@ -117,19 +115,10 @@ Here is the a">
     
 <nav id="article-nav">
   
-    <a href="/2016/10/02/Deep-Learning-Resources/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Deep_Learning_Resources
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/16/300w/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/10/08/A-toy-example-with-DL/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">300w</div>
+      <div class="article-nav-title">A toy example with DL</div>
     </a>
   
 </nav>
@@ -221,6 +210,23 @@ Here is the a">
 
 <script src="/js/script.js"></script>
 
-  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>
