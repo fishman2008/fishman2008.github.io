@@ -3,20 +3,27 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Caffe Visualization | Random Thoughts on Deep Learning</title>
+  <title>Torch Installation Guide | Random Thoughts on Deep Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="The visualization of deep learning network is very helpful to understand the global structure of how the network is evolved. Fortunately, caffe has already provided such a tool to visualize the networ">
+  <meta name="description" content="The following is a guideline to install Torch on Mac OSX Yosemite.
+First, follow the ins
+tructions given on the official website.
+in a terminal, run the commands WITHOUT sudogit clone https://github.c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Caffe Visualization">
-<meta property="og:url" content="http://yoursite.com/2016/06/17/hello-world/index.html">
+<meta property="og:title" content="Torch Installation Guide">
+<meta property="og:url" content="http://yoursite.com/2016/10/30/Torch-Installation-Guide/index.html">
 <meta property="og:site_name" content="Random Thoughts on Deep Learning">
-<meta property="og:description" content="The visualization of deep learning network is very helpful to understand the global structure of how the network is evolved. Fortunately, caffe has already provided such a tool to visualize the networ">
-<meta property="og:image" content="http://yoursite.com/img/cascade_cnn.jpg">
-<meta property="og:updated_time" content="2016-06-20T15:22:17.000Z">
+<meta property="og:description" content="The following is a guideline to install Torch on Mac OSX Yosemite.
+First, follow the ins
+tructions given on the official website.
+in a terminal, run the commands WITHOUT sudogit clone https://github.c">
+<meta property="og:updated_time" content="2016-10-30T08:16:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Caffe Visualization">
-<meta name="twitter:description" content="The visualization of deep learning network is very helpful to understand the global structure of how the network is evolved. Fortunately, caffe has already provided such a tool to visualize the networ">
-<meta name="twitter:image" content="http://yoursite.com/img/cascade_cnn.jpg">
+<meta name="twitter:title" content="Torch Installation Guide">
+<meta name="twitter:description" content="The following is a guideline to install Torch on Mac OSX Yosemite.
+First, follow the ins
+tructions given on the official website.
+in a terminal, run the commands WITHOUT sudogit clone https://github.c">
   
     <link rel="alternate" href="/atom.xml" title="Random Thoughts on Deep Learning" type="application/atom+xml">
   
@@ -65,10 +72,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Torch-Installation-Guide" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/17/hello-world/" class="article-date">
-  <time datetime="2016-06-17T14:26:44.000Z" itemprop="datePublished">2016-06-17</time>
+    <a href="/2016/10/30/Torch-Installation-Guide/" class="article-date">
+  <time datetime="2016-10-30T08:10:53.000Z" itemprop="datePublished">2016-10-30</time>
 </a>
     
   </div>
@@ -79,7 +86,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Caffe Visualization
+      Torch Installation Guide
     </h1>
   
 
@@ -87,16 +94,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>The visualization of deep learning network is very helpful to understand the global structure of how the network is evolved. Fortunately, caffe has already provided such a tool to visualize the network, namely via plotting the nets defined in prototxt file. </p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Install-the-graphviz"><a href="#Install-the-graphviz" class="headerlink" title="Install the graphviz"></a>Install the graphviz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pip install pydot</span><br><span class="line">$ sudo apt-get instll graphviz</span><br></pre></td></tr></table></figure>
-<h3 id="Execute-the-commands"><a href="#Execute-the-commands" class="headerlink" title="Execute the commands"></a>Execute the commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> caffe/examples</span><br><span class="line">$ python python/draw_net.py  yourPath.prototxt yourNetwork.name</span><br></pre></td></tr></table></figure>
-<h2 id="Visualization-Results"><a href="#Visualization-Results" class="headerlink" title="Visualization Results"></a>Visualization Results</h2><p>I have plotted two CNN networks which have been used to perform face landmark detection. The task of face landmark detection uses HDF5 format to store the input and switch the last layer of classifier to regression. </p>
-<p><img src="img/cascade_cnn.jpg" alt="CNN network used in luoyetx@github.com"></p>
+        <p>The following is a guideline to install Torch on Mac OSX Yosemite.</p>
+<p>First, follow the ins</p>
+<p>tructions given on the official website.</p>
+<h1 id="in-a-terminal-run-the-commands-WITHOUT-sudo"><a href="#in-a-terminal-run-the-commands-WITHOUT-sudo" class="headerlink" title="in a terminal, run the commands WITHOUT sudo"></a>in a terminal, run the commands WITHOUT sudo</h1><p>git clone <a href="https://github.com/torch/distro.git" target="_blank" rel="external">https://github.com/torch/distro.git</a> ~/torch –recursive<br>cd ~/torch; bash install-deps;<br>./install.sh</p>
+<p>Then, we need to add the torch into the PATH variable. </p>
+<p>touch ~/.bash_profile; open ~/.bash_profile</p>
+<p>Once the file is open, add the following two lines.</p>
+<h1 id="TORCH"><a href="#TORCH" class="headerlink" title="TORCH"></a>TORCH</h1><p>export PATH=$PATH:/Users/<your user="" name="">/torch/install/bin</your></p>
+<p>You need to replace “your user name” with the name you have on your computer and check the torch path to make sure it is correct. </p>
+<p>After that, you should be able to use “th” command. </p>
+<p>Reference:<br><a href="http://www.jeffreythompson.org/blog/2016/03/25/torch-rnn-mac-install/" target="_blank" rel="external">http://www.jeffreythompson.org/blog/2016/03/25/torch-rnn-mac-install/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/17/hello-world/" data-id="ciuwd5c91000bsms6ux9yxsee" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/30/Torch-Installation-Guide/" data-id="ciuwd5c8t0008sms68mphe9go" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -105,15 +118,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/06/20/CNN-for-Facial-Point-Detection/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          CNN for Facial Point Detection
-        
-      </div>
-    </a>
   
+    <a href="/2016/10/23/Cross-entropy-Loss-and-Softmax-Classifier/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Cross-entropy Loss and Softmax Classifier</div>
+    </a>
   
 </nav>
 
@@ -204,23 +213,6 @@
 
 <script src="/js/script.js"></script>
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
