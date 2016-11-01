@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -63,6 +63,80 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Faster-RCNN-Installation-Guide" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/01/Faster-RCNN-Installation-Guide/" class="article-date">
+  <time datetime="2016-11-01T14:41:47.000Z" itemprop="datePublished">2016-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/01/Faster-RCNN-Installation-Guide/">Faster RCNN Installation Guide</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Here is a guide to install py-faster-rcnn, in addition to the information provided on the official website.</p>
+<p><a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">https://github.com/rbgirshick/py-faster-rcnn</a></p>
+<ol>
+<li>Clone the Faster R-CNN repository</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Make sure to clone with --recursive</span><br><span class="line">git clone --recursive https://github.com/rbgirshick/py-faster-rcnn.git</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Build the Cython modules (FRCN_ROOT is the directory where you store the downloaded library)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $FRCN_ROOT/lib</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>Modify the following if you want to compile without GPU<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">???</span><br><span class="line">#CUDA = locate_cuda()</span><br><span class="line"></span><br><span class="line">???</span><br><span class="line">#            self.set_executable(&apos;compiler_so&apos;, CUDA[&apos;nvcc&apos;])</span><br><span class="line">???</span><br><span class="line">#    Extension(&apos;nms.gpu_nms&apos;,</span><br><span class="line">#        [&apos;nms/nms_kernel.cu&apos;, &apos;nms/gpu_nms.pyx&apos;],</span><br><span class="line">#        library_dirs=[CUDA[&apos;lib64&apos;]],</span><br><span class="line">#        libraries=[&apos;cudart&apos;],</span><br><span class="line">#        language=&apos;c++&apos;,</span><br><span class="line">#        runtime_library_dirs=[CUDA[&apos;lib64&apos;]],</span><br><span class="line">#        # this syntax is specific to this build system</span><br><span class="line">#        # we&apos;re only going to use certain compiler args with nvcc and not with</span><br><span class="line">#        # gcc the implementation of this trick is in customize_compiler() below</span><br><span class="line">#        extra_compile_args=&#123;&apos;gcc&apos;: [&quot;-Wno-unused-function&quot;],</span><br><span class="line">#                            &apos;nvcc&apos;: [&apos;-arch=sm_35&apos;,</span><br><span class="line">#                                     &apos;--ptxas-options=-v&apos;,</span><br><span class="line">#                                     &apos;-c&apos;,</span><br><span class="line">#                                     &apos;--compiler-options&apos;,</span><br><span class="line">#                                     &quot;&apos;-fPIC&apos;&quot;]&#125;,</span><br><span class="line">#        include_dirs = [numpy_include, CUDA[&apos;include&apos;]]</span><br><span class="line">#    ),</span><br><span class="line">???</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>Build Caffe and pycaffe<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $FRCN_ROOT/caffe-fast-rcnn</span><br><span class="line">make -j8 &amp;&amp; make pycaffe</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Use the following makefile.config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Refer to http://caffe.berkeleyvision.org/installation.html</span><br><span class="line"># Contributions simplifying and improving our build system are welcome!</span><br><span class="line"></span><br><span class="line"># cuDNN acceleration switch (uncomment to build with cuDNN).</span><br><span class="line"># USE_CUDNN := 1</span><br><span class="line"></span><br><span class="line"># CPU-only switch (uncomment to build without GPU support).</span><br><span class="line">CPU_ONLY := 1</span><br><span class="line"></span><br><span class="line"># uncomment to disable IO dependencies and corresponding data layers</span><br><span class="line"># USE_OPENCV := 0</span><br><span class="line"># USE_LEVELDB := 0</span><br><span class="line"># USE_LMDB := 0</span><br><span class="line"></span><br><span class="line"># uncomment to allow MDB_NOLOCK when reading LMDB files (only if necessary)</span><br><span class="line">#    You should not set this flag if you will be reading LMDBs with any</span><br><span class="line">#    possibility of simultaneous read and write</span><br><span class="line"># ALLOW_LMDB_NOLOCK := 1</span><br><span class="line"></span><br><span class="line"># Uncomment if you&apos;re using OpenCV 3</span><br><span class="line"># OPENCV_VERSION := 3</span><br><span class="line"></span><br><span class="line"># To customize your choice of compiler, uncomment and set the following.</span><br><span class="line"># N.B. the default for Linux is g++ and the default for OSX is clang++</span><br><span class="line"># CUSTOM_CXX := g++</span><br><span class="line"></span><br><span class="line"># CUDA directory contains bin/ and lib/ directories that we need.</span><br><span class="line"># CUDA_DIR := /usr/local/cuda</span><br><span class="line"># On Ubuntu 14.04, if cuda tools are installed via</span><br><span class="line"># &quot;sudo apt-get install nvidia-cuda-toolkit&quot; then use this instead:</span><br><span class="line"># CUDA_DIR := /usr</span><br><span class="line"></span><br><span class="line"># CUDA architecture setting: going with all of them.</span><br><span class="line"># For CUDA &lt; 6.0, comment the *_50 lines for compatibility.</span><br><span class="line">#CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \</span><br><span class="line">#        -gencode arch=compute_20,code=sm_21 \</span><br><span class="line">#        -gencode arch=compute_30,code=sm_30 \</span><br><span class="line">#        -gencode arch=compute_35,code=sm_35 \</span><br><span class="line">#        -gencode arch=compute_50,code=sm_50 \</span><br><span class="line">#        -gencode arch=compute_50,code=compute_50</span><br><span class="line"></span><br><span class="line"># BLAS choice:</span><br><span class="line"># atlas for ATLAS (default)</span><br><span class="line"># mkl for MKL</span><br><span class="line"># open for OpenBlas</span><br><span class="line">BLAS := open</span><br><span class="line"># Custom (MKL/ATLAS/OpenBLAS) include and lib directories.</span><br><span class="line"># Leave commented to accept the defaults for your choice of BLAS</span><br><span class="line"># (which should work)!</span><br><span class="line">BLAS_INCLUDE := /usr/include/atlas-x86_64-base</span><br><span class="line">BLAS_LIB := /usr/lib64/atlas</span><br><span class="line"></span><br><span class="line"># Homebrew puts openblas in a directory that is not on the standard search path</span><br><span class="line"># BLAS_INCLUDE := $(shell brew --prefix openblas)/include</span><br><span class="line"># BLAS_LIB := $(shell brew --prefix openblas)/lib</span><br><span class="line"></span><br><span class="line"># This is required only if you will compile the matlab interface.</span><br><span class="line"># MATLAB directory should contain the mex binary in /bin.</span><br><span class="line"># MATLAB_DIR := /usr/local</span><br><span class="line"># MATLAB_DIR := /Applications/MATLAB_R2012b.app</span><br><span class="line"></span><br><span class="line"># NOTE: this is required only if you will compile the python interface.</span><br><span class="line"># We need to be able to find Python.h and numpy/arrayobject.h.</span><br><span class="line">PYTHON_INCLUDE := /usr/include/python2.7 \</span><br><span class="line">                  /usr/lib64/python2.7/site-packages/numpy/core/include</span><br><span class="line"># Anaconda Python distribution is quite popular. Include path:</span><br><span class="line"># Verify anaconda location, sometimes it&apos;s in root.</span><br><span class="line"> ANACONDA_HOME := $(HOME)/anaconda2</span><br><span class="line"> PYTHON_INCLUDE := $(ANACONDA_HOME)/include \</span><br><span class="line">         $(ANACONDA_HOME)/include/python2.7 \</span><br><span class="line">         $(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include \</span><br><span class="line"></span><br><span class="line"># Uncomment to use Python 3 (default is Python 2)</span><br><span class="line"># PYTHON_LIBRARIES := boost_python3 python3.5m</span><br><span class="line"># PYTHON_INCLUDE := /usr/include/python3.5m \</span><br><span class="line">#                 /usr/lib/python3.5/dist-packages/numpy/core/include</span><br><span class="line"></span><br><span class="line"># We need to be able to find libpythonX.X.so or .dylib.</span><br><span class="line">PYTHON_LIB := /usr/lib64</span><br><span class="line">PYTHON_LIB := $(ANACONDA_HOME)/lib</span><br><span class="line"></span><br><span class="line"># Homebrew installs numpy in a non standard path (keg only)</span><br><span class="line"># PYTHON_INCLUDE += $(dir $(shell python -c &apos;import numpy.core; print(numpy.core.__file__)&apos;))/include</span><br><span class="line"># PYTHON_LIB += $(shell brew --prefix numpy)/lib</span><br><span class="line"></span><br><span class="line"># Uncomment to support layers written in Python (will link against Python libs)</span><br><span class="line">WITH_PYTHON_LAYER := 1</span><br><span class="line"></span><br><span class="line"># Whatever else you find you need goes here.</span><br><span class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/include</span><br><span class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/lib64 /usr/lib</span><br><span class="line"></span><br><span class="line"># If Homebrew is installed at a non standard location (for example your home directory) and you use it for general dependencies</span><br><span class="line"># INCLUDE_DIRS += $(shell brew --prefix)/include</span><br><span class="line"># LIBRARY_DIRS += $(shell brew --prefix)/lib</span><br><span class="line"></span><br><span class="line"># Uncomment to use `pkg-config` to specify OpenCV library paths.</span><br><span class="line"># (Usually not necessary -- OpenCV libraries are normally installed in one of the above $LIBRARY_DIRS.)</span><br><span class="line"># USE_PKG_CONFIG := 1</span><br><span class="line"></span><br><span class="line">BUILD_DIR := build</span><br><span class="line">DISTRIBUTE_DIR := distribute</span><br><span class="line"></span><br><span class="line"># Uncomment for debugging. Does not work on OSX due to https://github.com/BVLC/caffe/issues/171</span><br><span class="line"># DEBUG := 1</span><br><span class="line"></span><br><span class="line"># The ID of the GPU that &apos;make runtest&apos; will use to run unit tests.</span><br><span class="line"># TEST_GPUID := 0</span><br><span class="line"></span><br><span class="line"># enable pretty build (comment to see full commands)</span><br><span class="line">Q ?= @</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>In case you encounter libopencv_highgui.so error, use the following to fix the issue and then compile again.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/lib/x86_64-linux-gnu</span><br><span class="line">sudo ln -s ~/anaconda2/lib/libpng16.so.16 libpng16.so.16</span><br><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Download pre-computed Faster R-CNN detectors</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $FRCN_ROOT</span><br><span class="line">./data/scripts/fetch_faster_rcnn_models.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Run the demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $FRCN_ROOT</span><br><span class="line">./tools/demo.py</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>For CPU, you need to modify /lib/fast-rcnn/nms_wrapper.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def nms (dets,thresh, force_cpu=True)</span><br><span class="line">#from nms.gpu_nms import gpu_nms</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/demo.py --cpu</span><br></pre></td></tr></table></figure>
+<p>Now see the results here.</p>
+<h2 id="Demo-results-by-Faster-RCNN"><a href="#Demo-results-by-Faster-RCNN" class="headerlink" title="Demo results by Faster-RCNN"></a>Demo results by Faster-RCNN</h2><div id="image-table"><br>    <table><br>        <tr><br>            <td style="padding:5px"><br>                <img src="img/faster-rcnn/figure_1.png" height="200" width="250"><br>              </td><br>            <td style="padding:5px"><br>                <img src="img/faster-rcnn/figure_3.png" height="200" width="250"><br>             </td><br>            <td style="padding:5px"><br>                <img src="img/faster-rcnn/figure_5.png" height="200" width="250"><br>             </td><br>        </tr><br>    </table><br></div>
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/01/Faster-RCNN-Installation-Guide/" data-id="ciuzmttis0003ohs60nrtvo9a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Torch-Installation-Guide" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -101,7 +175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/30/Torch-Installation-Guide/" data-id="ciuwd5c8t0008sms68mphe9go" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/30/Torch-Installation-Guide/" data-id="ciuzmttjb0008ohs6z3ln8w9l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,7 +225,7 @@ q(y_j=1|x)=\frac{exp(W_j x)}{\sum_{c=1}^{C} exp(W_cx)}\\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/23/Cross-entropy-Loss-and-Softmax-Classifier/" data-id="ciuwd5c8g0003sms6tmq5hike" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/23/Cross-entropy-Loss-and-Softmax-Classifier/" data-id="ciuzmttj80007ohs65skhl832" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +282,7 @@ q(y_j=1|x)=\frac{exp(W_j x)}{\sum_{c=1}^{C} exp(W_cx)}\\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/08/A-toy-example-with-DL/" data-id="ciuwd5c8i0004sms6ko4a73wn" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/08/A-toy-example-with-DL/" data-id="ciuzmttii0001ohs66kig6jed" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +333,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/08/Softmax-Loss-Derivative/" data-id="ciuwd5c8o0006sms6w8hkna1f" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/08/Softmax-Loss-Derivative/" data-id="ciuzmttjn000aohs62cbqcd4z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -310,7 +384,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/" data-id="ciuwd5c8z000asms6doyi1bn5" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/02/Transfer-Learning-Tips/" data-id="ciuzmttji0009ohs6rrmkwkve" class="article-share-link">Share</a>
       
       
     </footer>
@@ -354,7 +428,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Deep-Learning-Resources/" data-id="ciuwd5c8l0005sms65pid251r" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/02/Deep-Learning-Resources/" data-id="ciuzmttiv0004ohs66wfe8yhd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -397,7 +471,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="ciuwd5c8d0002sms6w7bbnozk" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/02/Bay-Area-DeepLearning/" data-id="ciuzmttj20006ohs6dgjasca5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -435,7 +509,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/16/300w/" data-id="ciuwd5c840000sms6pdubiw3t" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/08/16/300w/" data-id="ciuzmttib0000ohs6qt5f94pl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -483,59 +557,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="ciuwd5c8s0007sms6u31c6fwk" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-vanillacnn" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/28/vanillacnn/" class="article-date">
-  <time datetime="2016-06-28T13:40:03.000Z" itemprop="datePublished">2016-06-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/28/vanillacnn/">vanillacnn</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Face alignment can be solved by applying a very straightforward CNN approach. That means we can “tweak” traditional CNN used by image classification to do regression task for face alignment. </p>
-<p>Yue Wu<em>, Tal Hassner</em>, KangGeon Kim, Gerard Medioni and Prem Natarajan, Facial Landmark Detection with Tweaked Convolutional Neural Networks, arXiv preprint arXiv:1511.04031, 21 Mar 2016</p>
-<p><a href="http://www.openu.ac.il/home/hassner/projects/tcnn_landmarks/" target="_blank" rel="external">http://www.openu.ac.il/home/hassner/projects/tcnn_landmarks/</a></p>
-<p>ishay2b@github.com has implementation for this paper, basically the VanillaCNN part.<br><a href="https://github.com/ishay2b/VanillaCNN" target="_blank" rel="external">https://github.com/ishay2b/VanillaCNN</a></p>
-<p>I have retrained the model with the MTFL dataset (10,000) images with five landmarks annotated. The test is AFLW dataset with 2995 images (~3000). You can access the MTFL dataset from the following link:<br><a href="http://mmlab.ie.cuhk.edu.hk/projects/TCDCN.html" target="_blank" rel="external">http://mmlab.ie.cuhk.edu.hk/projects/TCDCN.html</a></p>
-<p>It is noted that the same training dataset has been used in cascaded CNN work.<br><a href="http://mmlab.ie.cuhk.edu.hk/archive/CNN_FacePoint.htm" target="_blank" rel="external">http://mmlab.ie.cuhk.edu.hk/archive/CNN_FacePoint.htm</a></p>
-<p>So please do not confuse with the naming conventions used in the package. </p>
-<p>The first step is to retrain the model by using the provided package. The default set of parameters is used. </p>
-<h2 id="Experimental-Result"><a href="#Experimental-Result" class="headerlink" title="Experimental Result"></a>Experimental Result</h2><h3 id="Results-on-AFLW-and-AFW-datasets-by-VanillaCNN"><a href="#Results-on-AFLW-and-AFW-datasets-by-VanillaCNN" class="headerlink" title="Results on AFLW and AFW datasets by VanillaCNN"></a>Results on AFLW and AFW datasets by VanillaCNN</h3><p>Test Error AFLW: 8.545266 mean error, 2535 items, 606 failures  0.239053 precent<br>Test Error AFW:  7.905281 mean error, 141 items, 25 failures  0.177305 precent</p>
-<h3 id="Results-on-AFLW-and-AFW-datasets-by-ECCV-14-paper"><a href="#Results-on-AFLW-and-AFW-datasets-by-ECCV-14-paper" class="headerlink" title="Results on AFLW  and AFW datasets by ECCV 14 paper"></a>Results on AFLW  and AFW datasets by ECCV 14 paper</h3><p>Test Error AFLW: 8.545266 mean error, 8.0<br>Test Error AFW: 8.545266 mean error, 8.2</p>
-<h2 id="Visualization-the-Network"><a href="#Visualization-the-Network" class="headerlink" title="Visualization the Network"></a>Visualization the Network</h2><p>I have plotted the CNN network used in this experiment.</p>
-<p><img src="img/VanillaCNN.png" alt="Vanilla CNN Network"></p>
-<h2 id="Face-Alignment-Results-on-LFPW-dataset"><a href="#Face-Alignment-Results-on-LFPW-dataset" class="headerlink" title="Face Alignment Results on LFPW dataset"></a>Face Alignment Results on LFPW dataset</h2><div id="image-table"><br>    <table><br>        <tr><br>            <td style="padding:5px"><br>                <img src="img/VanillaCNN_detection/0132-image31201.jpg" height="200" width="250"><br>              </td><br>            <td style="padding:5px"><br>                <img src="img/VanillaCNN_detection/0177-image71131.jpg" height="200" width="250"><br>             </td><br>            <td style="padding:5px"><br>                <img src="img/VanillaCNN_detection/0223-image08358.jpg" height="200" width="250"><br>             </td><br>                        <td style="padding:5px"><br>                <img src="img/VanillaCNN_detection/0275-image17840.jpg" height="200" width="250"><br>             </td><br>        </tr><br>    </table><br></div>
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/28/vanillacnn/" data-id="ciuwd5c8x0009sms66da9sxcw" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="ciuzmttiz0005ohs6d9zemdap" class="article-share-link">Share</a>
       
       
     </footer>
@@ -566,7 +588,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
     </div>
   </div>
 
@@ -574,9 +596,13 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/01/Faster-RCNN-Installation-Guide/">Faster RCNN Installation Guide</a>
+          </li>
         
           <li>
             <a href="/2016/10/30/Torch-Installation-Guide/">Torch Installation Guide</a>
@@ -594,10 +620,6 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
             <a href="/2016/10/08/Softmax-Loss-Derivative/">Softmax-Loss Derivative</a>
           </li>
         
-          <li>
-            <a href="/2016/10/02/Transfer-Learning-Tips/">Transfer_Learning_Tips</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -611,7 +633,7 @@ L_{i} &amp; = -log(p_{y_{i}}) \\
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Cunjian Chen<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

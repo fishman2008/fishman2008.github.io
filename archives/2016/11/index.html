@@ -3,22 +3,17 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Multitask_CNN | Random Thoughts on Deep Learning</title>
+  <title>Archives: 2016/11 | Random Thoughts on Deep Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Face landmark detection can be combined with other tasks, such as gender classification, pose estimation and so on. This is usually referred as multi-task CNN learning in this context. It is not very">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Multitask_CNN">
-<meta property="og:url" content="http://yoursite.com/2016/07/19/Multitask-CNN/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Random Thoughts on Deep Learning">
+<meta property="og:url" content="http://yoursite.com/archives/2016/11/index.html">
 <meta property="og:site_name" content="Random Thoughts on Deep Learning">
-<meta property="og:description" content="Face landmark detection can be combined with other tasks, such as gender classification, pose estimation and so on. This is usually referred as multi-task CNN learning in this context. It is not very">
-<meta property="og:image" content="http://yoursite.com/img/20160719/vanilla_multitask.png">
-<meta property="og:image" content="http://yoursite.com/img/20160719/hyperface.png">
-<meta property="og:image" content="http://yoursite.com/img/20160719/multitask_face.png">
-<meta property="og:updated_time" content="2016-07-19T15:35:52.000Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Multitask_CNN">
-<meta name="twitter:description" content="Face landmark detection can be combined with other tasks, such as gender classification, pose estimation and so on. This is usually referred as multi-task CNN learning in this context. It is not very">
-<meta name="twitter:image" content="http://yoursite.com/img/20160719/vanilla_multitask.png">
+<meta name="twitter:title" content="Random Thoughts on Deep Learning">
+<meta name="twitter:description">
   
     <link rel="alternate" href="/atom.xml" title="Random Thoughts on Deep Learning" type="application/atom+xml">
   
@@ -67,72 +62,39 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Multitask-CNN" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/19/Multitask-CNN/" class="article-date">
-  <time datetime="2016-07-19T15:08:37.000Z" itemprop="datePublished">2016-07-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Multitask_CNN
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/11/01/Faster-RCNN-Installation-Guide/" class="archive-article-date">
+  <time datetime="2016-11-01T14:41:47.000Z" itemprop="datePublished">Nov 1</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/11/01/Faster-RCNN-Installation-Guide/">Faster RCNN Installation Guide</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Face landmark detection can be combined with other tasks, such as gender classification, pose estimation and so on. This is usually referred as multi-task CNN learning in this context. It is not very difficult to adapt a single-task CNN to a multi-task CNN. We only need to modify the prototxt file and properly define the input and ouput data structures. Here I given an example of multi-task CNN based on VanillaCNN structure.</p>
-<p>The network structure is given as follows:</p>
-<p><img src="img/20160719/vanilla_multitask.png" alt="VanillaCNN_Multitask"></p>
-<p>The dataset is provided as follows:</p>
-<p><a href="http://mmlab.ie.cuhk.edu.hk/projects/TCDCN.html" target="_blank" rel="external">http://mmlab.ie.cuhk.edu.hk/projects/TCDCN.html</a></p>
-<p>A recent work, namely “HyperFace”, also provides very detailed analysis on how we can perform multi-task learning with CNN. The presented ideas are very straightforward and can be easily implemented, at least for the multi-task CNN part or the individual parts. </p>
-<p><a href="http://arxiv.org/abs/1603.01249" target="_blank" rel="external">http://arxiv.org/abs/1603.01249</a></p>
-<p>You can see the HyperFace network structure here. I have briefly copied the figure from the paper. </p>
-<p><img src="img/20160719/hyperface.png" alt="HyperFace"></p>
-<p>Besides, you can also check the multitask network structure. </p>
-<p><img src="img/20160719/multitask_face.png" alt="HyperFace"></p>
-<p>As mentioned in the paper, the networks are modified from the Region-based CNN, which is derived from AlexNet. </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/19/Multitask-CNN/" data-id="ciuzmttiz0005ohs6d9zemdap" class="article-share-link">Share</a>
-      
-      
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/08/16/300w/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          300w
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/06/28/vanillacnn/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">vanillacnn</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
 </section>
         
